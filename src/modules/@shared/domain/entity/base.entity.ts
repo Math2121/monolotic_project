@@ -6,7 +6,7 @@ export default class BaseEntity {
     private _createdAt: Date;
     private _updatedAt: Date;
 
-    constructor(id: Id) {
+    constructor(id?: Id) {
         this._id = id
         this._createdAt = new Date();
         this._updatedAt = new Date();
