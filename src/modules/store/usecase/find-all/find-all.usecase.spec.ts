@@ -5,7 +5,6 @@ import FindAllProductUsecase from "./find-all.usecase"
 const product = new Product({
     id: new Id("1"),
     name: 'Product 1',
-    price: 100,
     description: 'Product 1 Description',
     salesPrice: 90
 })
@@ -13,7 +12,6 @@ const product = new Product({
 const product2 = new Product({
     id: new Id("2"),
     name: 'Product 2',
-    price: 100,
     description: 'Product 2 Description',
     salesPrice: 90
 })
