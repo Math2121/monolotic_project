@@ -10,12 +10,13 @@ export default class CheckStockUseCase {
     }
 
     async execute(input: InputCheckStockDto): Promise<CheckStockOutputDto> {
-        const product = await this._productRepository.find(input.productId);
+
+        const product = await this._productRepository.find(input.productID);
         if (!product) {
-            throw new Error(`Product with id ${input.productId} not found.`);
+            throw new Error(`Product with id ${input.productID} not found.`);
         }
         if (product.stock <= 0) {
-            throw new Error(`Product with id ${input.productId} is out of stock.`);
+            throw new Error(`Product with id ${input.productID} is out of stock.`);
         }
 
         return {

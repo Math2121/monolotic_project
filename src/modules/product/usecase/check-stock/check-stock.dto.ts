@@ -1,5 +1,5 @@
 export default interface InputCheckStockDto {
-    productId: string;
+    productID: string;
 }
 
 export interface CheckStockOutputDto {

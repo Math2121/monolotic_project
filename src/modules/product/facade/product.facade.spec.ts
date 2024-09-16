@@ -40,4 +40,25 @@ describe("Product Facade", () => {
         expect(product).toBeTruthy()
         expect(product.get('name')).toBe("Test Product")
     })
+
+    it("should check  Product stock", async () => {
+
+        const productFacade = ProductFacadeFactory.create()
+        const input = {
+            id: "1",
+            name: "Test Product",
+            purchasePrice: 100,
+            stock: 10,
+            description: "teste"
+        }
+        await productFacade.addProduct(input)
+
+        const result = await productFacade.checkStock({
+            productID:"1"
+        })
+
+        expect(result.productID).toBe("1")
+        expect(result.stock).toBe(10)
+
+    })
 })
