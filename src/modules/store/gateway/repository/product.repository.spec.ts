@@ -56,10 +56,12 @@ describe("Product store repository test", () => {
             description: "teste",
         })
         const productRepository = new ProductRepository()
-        return productRepository.find("1").then((product) => {
-            expect(product.id).toBe("1")
-            expect(product.name).toBe("Product 1")
+        return productRepository.find("2").then((product) => {
+            expect(product.id).toBe(2)
+            expect(product.name).toBe("Product 2")
             expect(product.salesPrice).toBe(100)
         })
     })
+
+
 })
