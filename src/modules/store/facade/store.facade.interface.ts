@@ -1,3 +1,5 @@
+import Product from "../domain/product.entity"
+
 export interface FIndStoreFacadeInputDto {
     id: string
 }
@@ -9,12 +11,7 @@ export interface FIndStoreFacadeOutputDto {
 }
 
 export interface FIndAllStoreFacadeOutputDto {
-    products: {
-        id: string
-        name: string
-        description: string
-        salesPrice: number
-    }[]
+    products: Product[]
 }
 export interface StoreFacadeInterface {
     find(id: FIndStoreFacadeInputDto): Promise<FIndStoreFacadeOutputDto>

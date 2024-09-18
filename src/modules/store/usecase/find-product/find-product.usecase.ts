@@ -11,11 +11,12 @@ export default class FindProductUseCase implements UseCaseInterface {
         if (!product) {
             throw new Error(`Product not found with id: ${input.id}`);
         }
+
         const output: FindProductOutputDto = {
-            id: product.id.id,
+            id: product.id,
             name: product.name,
             description: product.description,
-            salePrice: product.salesPrice
+            salesPrice: product.salesPrice
         };
 
         return output;

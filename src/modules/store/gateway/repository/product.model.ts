@@ -7,8 +7,8 @@ import { AllowNull, Column, Model, PrimaryKey, Table } from "sequelize-typescrip
 export default class ProductModel extends Model {
 
     @PrimaryKey
-    @Column
-    id: number;
+    @Column({ allowNull: false })
+    id: string;
 
 
     @Column
