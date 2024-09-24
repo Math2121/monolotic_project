@@ -1,6 +1,7 @@
-import Id from "../../../../@shared/domain/value_object/ide.value_object";
-import UseCaseInterface from "../../../../@shared/usecase/usecase.interface";
-import Client from "../../entity";
+
+import Id from "../../../@shared/domain/value_object/ide.value_object";
+import UseCaseInterface from "../../../@shared/usecase/usecase.interface";
+import Client from "../../domain/entity";
 import ClientGateway from "../../gateway/client.gateway";
 import AddClientInputDto from "./add-client.dto";
 

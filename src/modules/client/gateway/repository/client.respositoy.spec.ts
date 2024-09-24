@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize-typescript"
 import { ClientModel } from "./client.model"
 import ClientRepository from "./client.repository"
-import Id from "../../../../@shared/domain/value_object/ide.value_object"
-import Client from "../../entity"
+import Id from "../../../@shared/domain/value_object/ide.value_object"
+import Client from "../../domain/entity"
 
 describe("Client Repository tests", () => {
     let sequelize: Sequelize

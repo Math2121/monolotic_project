@@ -1,3 +1,5 @@
+import Id from "../../@shared/domain/value_object/ide.value_object";
+
 export default interface AddClientFacadeInputDto {
     name: string;
     email: string;
@@ -15,7 +17,7 @@ export interface FindClientFacadeInputDto {
 }
 
 export interface FindClientFacadeOutputDto {
-    id: string;
+    id: Id;
     name: string;
     email: string;
     address: string;
