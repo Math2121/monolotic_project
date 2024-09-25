@@ -6,7 +6,7 @@ type TransactionProps = {
     id?: Id
     amount: number
     orderId: string
-    status: string
+    status?: string
     createdAt?: Date
     updatedAt?: Date
 }
