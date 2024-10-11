@@ -58,4 +58,18 @@ describe("Invoice Test usecase", () => {
         expect(output.address.state).toEqual("CA")
         expect(output.total).toEqual(51400)
     })
+
+    it("should warn when no price is found", () => { 
+        const mockRepository = MockRepository()
+        mockRepository.find = jest.fn().mockReturnValueOnce(null)
+        const invoiceUsecase = new FindUseCaseInvoice(mockRepository)
+
+        const input = {
+            id: "teste"
+        }
+        
+        expect(async () => {
+            await invoiceUsecase.execute(input)
+        }).rejects.toThrow("Invoice not found")
+    })
 })
