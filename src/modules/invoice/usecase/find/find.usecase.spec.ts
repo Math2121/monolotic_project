@@ -31,6 +31,7 @@ const invoice = new Invoice(
 const MockRepository = () => {
     return {
         find: jest.fn().mockReturnValueOnce(invoice),
+        save: jest.fn()
     }
 
 
