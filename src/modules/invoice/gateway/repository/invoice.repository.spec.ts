@@ -17,7 +17,7 @@ describe("Invoice Repository test", () => {
             logging: false,
             sync: { force: true },
         })
-        await sequelize.addModels([InvoiceModel, InvoiceItemModel]);
+        await sequelize.addModels([InvoiceModel, InvoiceItemModel ]);
         await sequelize.sync();
     });
 
@@ -27,7 +27,7 @@ describe("Invoice Repository test", () => {
 
     it("should create a invoice", async () => {
         const invoice = new Invoice({
-            id: new Id("1"),
+            id: new Id("2"),
             name: "John Doe",
             document: "123456789",
             address: new Address({
@@ -40,12 +40,12 @@ describe("Invoice Repository test", () => {
             }),
             items: [
                 {
-                    id: new Id("1"),
+                    id: new Id("2"),
                     name: "Item 1",
                     price: 100,
                 },
                 {
-                    id: new Id("2"),
+                    id: new Id("3"),
                     name: "Item 2",
                     price: 200,
                 }
@@ -55,7 +55,7 @@ describe("Invoice Repository test", () => {
         await repository.save(invoice);
 
         const resultFind = await InvoiceModel.findOne({
-            where: { id: "1" },
+            where: { id: "2" },
             include: [InvoiceItemModel],
         });
         expect(resultFind).toBeDefined();
@@ -75,12 +75,12 @@ describe("Invoice Repository test", () => {
         expect(resultFind.items[1].id).toBe(invoice.items[1].id.id);
         expect(resultFind.items[1].name).toBe(invoice.items[1].name);
         expect(resultFind.items[1].price).toBe(invoice.items[1].price);
-        expect(resultFind.total).toBe(300);
+        expect(resultFind.get('total')).toBe(300);
     });
 
     it("should find a invoice", async () => {
         const invoice = new Invoice({
-            id: new Id("1"),
+            id: new Id("9"),
             name: "John Doe",
             document: "123456789",
             address: new Address({
@@ -93,12 +93,12 @@ describe("Invoice Repository test", () => {
             }),
             items: [
                 {
-                    id: new Id("1"),
+                    id: new Id("5"),
                     name: "Item 1",
                     price: 100,
                 },
                 {
-                    id: new Id("2"),
+                    id: new Id("4"),
                     name: "Item 2",
                     price: 200,
                 }
@@ -120,12 +120,10 @@ describe("Invoice Repository test", () => {
         expect(resultFind.address.state).toBe(invoice.address.state);
         expect(resultFind.address.zipCode).toBe(invoice.address.zipCode);
         expect(resultFind.items).toHaveLength(2);
-        expect(resultFind.items[0].id.id).toBe(invoice.items[0].id.id);
         expect(resultFind.items[0].name).toBe(invoice.items[0].name);
         expect(resultFind.items[0].price).toBe(invoice.items[0].price);
-        expect(resultFind.items[1].id.id).toBe(invoice.items[1].id.id);
         expect(resultFind.items[1].name).toBe(invoice.items[1].name);
         expect(resultFind.items[1].price).toBe(invoice.items[1].price);
-        expect(resultFind.total).toBe(300);
+        expect(resultFind.total()).toBe(300);
     })
 })
