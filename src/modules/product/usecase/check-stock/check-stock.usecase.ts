@@ -20,7 +20,7 @@ export default class CheckStockUseCase {
         }
 
         return {
-            productId: product.id.id,
+            productID: product.id.id,
             stock: product.stock,
 
         };

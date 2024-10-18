@@ -1,5 +1,5 @@
-import Id from "../../../../@shared/domain/value_object/ide.value_object"
-import Client from "../../entity"
+import Id from "../../../@shared/domain/value_object/ide.value_object"
+import Client from "../../domain/entity"
 import FindClientUseCase from "./find-client.usecase"
 
 const client = new Client({

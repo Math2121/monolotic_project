@@ -23,12 +23,12 @@ describe("Check stock test", () => {
         const checkStockUsecase = new CheckStockUseCase(productRepository)
 
         const input = {
-            productId: product.id.id
+            productID: product.id.id
         }
 
         const result = await checkStockUsecase.execute(input)
         expect(result).toBeDefined()
-        expect(productRepository.find).toBeCalledWith(input.productId)
+        expect(productRepository.find).toBeCalledWith(input.productID)
         expect(result.stock).toEqual(10)
 
 

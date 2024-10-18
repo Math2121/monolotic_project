@@ -8,7 +8,7 @@ import FindClientUseCase from "../usecase/find-client/find-client.usecase"
 describe("Client Facade tests", () => {
     let sequelize: Sequelize
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
@@ -20,7 +20,7 @@ describe("Client Facade tests", () => {
         await sequelize.sync()
     })
 
-    afterAll(async () => {
+    afterEach(async () => {
         await sequelize.close()
     })
 

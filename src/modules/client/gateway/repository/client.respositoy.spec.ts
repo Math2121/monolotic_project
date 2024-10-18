@@ -7,7 +7,7 @@ import Client from "../../domain/entity"
 describe("Client Repository tests", () => {
     let sequelize: Sequelize
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
@@ -19,7 +19,7 @@ describe("Client Repository tests", () => {
         await sequelize.sync()
     })
 
-    afterAll(async () => {
+    afterEach(async () => {
         await sequelize.close()
     })
 

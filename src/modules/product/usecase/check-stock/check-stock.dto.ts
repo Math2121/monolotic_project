@@ -3,6 +3,6 @@ export default interface InputCheckStockDto {
 }
 
 export interface CheckStockOutputDto {
-    productId: string;
+    productID: string;
     stock:number
 }

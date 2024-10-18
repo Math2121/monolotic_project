@@ -8,7 +8,7 @@ import ProductFacadeFactory from "../factory/facade.product"
 describe("Product Facade", () => {
     let sequelize: Sequelize
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
@@ -20,7 +20,7 @@ describe("Product Facade", () => {
         await sequelize.sync()
     })
 
-    afterAll(async () => {
+    afterEach(async () => {
         await sequelize.close()
     })
 
