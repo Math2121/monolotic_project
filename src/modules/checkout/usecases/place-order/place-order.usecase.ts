@@ -1,14 +1,19 @@
+import Id from "../../../@shared/domain/value_object/ide.value_object";
 import UseCaseInterface from "../../../@shared/usecase/usecase.interface";
 import { ClientFacadeInterface } from "../../../client/facade/client.facade.interface";
 import ProductFacadeInterface from "../../../product/facade/product.facade.interface";
+import StoreFacade from "../../../store/facade/store.facade";
+import Product from "../../domain/product.entity";
 import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
 
 export default class PlaceOrderUseCase implements UseCaseInterface {
     private _clientFacade: ClientFacadeInterface
     private _productFacade: ProductFacadeInterface 
-    constructor(clientFacade: ClientFacadeInterface, productFacade: ProductFacadeInterface) {
+    private _catalogueFacade: StoreFacade
+    constructor(clientFacade: ClientFacadeInterface, productFacade: ProductFacadeInterface, catalogueFacade: StoreFacade) {
         this._clientFacade = clientFacade
         this._productFacade = productFacade
+        this._catalogueFacade = catalogueFacade
     }
     async execute(input: PlaceOrderInputDto): Promise<PlaceOrderOutputDto> {
         //buscar client
@@ -58,6 +63,21 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
                 throw new Error(`Product ${product.productID} is not available in stock`);
             }
         }
+
+    }
+
+    private async getProduct(productId: string): Promise<Product>{
+        const product = await this._catalogueFacade.find({ id: productId })
+        if (!product) {
+            throw new Error(`Product not found`);
+        }
+        const productProps = {
+            id: new Id(product.id),
+            name: product.name,
+            description: product.description,
+            salesPrice: product.salesPrice
+        }
+        return new Product(productProps)
 
     }
 

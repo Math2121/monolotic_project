@@ -1,6 +1,8 @@
+import Id from "../../../@shared/domain/value_object/ide.value_object"
+import Product from "../../domain/product.entity"
 import { PlaceOrderInputDto } from "./place-order.dto"
 import PlaceOrderUseCase from "./place-order.usecase"
-
+const mockDate = new Date(2000, 1, 1)
 describe("Place Order UseCase test", () => {
     describe("Validate products method", () => {
         //@ts-expect-error - no params in constructor
@@ -103,6 +105,51 @@ describe("Place Order UseCase test", () => {
             )
             expect(mockValidateProducts).toHaveBeenCalledTimes(1)
 
+        })
+    })
+
+    describe("getProducts", () => {
+        beforeAll(() => {
+            jest.useFakeTimers("modern")
+            jest.setSystemTime(mockDate)
+        })
+        afterAll(() => {
+            jest.useRealTimers()
+        })
+        //@ts-expect-error - no params in constructor
+        const placeOrderUseCase = new PlaceOrderUseCase()
+        it("should throw an error when product not found", async () => {
+            const mockCatalogueFacade = {
+                find: jest.fn().mockResolvedValue(null)
+            }
+
+            //@ts-expect-error - no params in constructor
+            placeOrderUseCase["_catalogueFacade"] = mockCatalogueFacade
+
+            await expect(placeOrderUseCase["getProduct"]("0")).rejects.toThrow(new Error("Product not found"))
+
+
+
+        })
+        it("should return a product", async () => {
+            const mockCatalogueFacade = {
+                find: jest.fn().mockResolvedValue({
+                    id: "0",
+                    name: "Test Product",
+                    salesPrice: 0,
+                    description: "Product 0 description"
+                })
+            }
+            //@ts-expect-error - no params in constructor
+            placeOrderUseCase["_catalogueFacade"] = mockCatalogueFacade
+
+            await expect(placeOrderUseCase["getProduct"]("0")).resolves.toEqual(new Product({
+                id: new Id("0"),
+                name: "Test Product",
+                salesPrice: 0,
+                description: "Product 0 description"
+            }))
+            expect(mockCatalogueFacade.find).toHaveBeenCalledTimes(1)
         })
     })
 })
