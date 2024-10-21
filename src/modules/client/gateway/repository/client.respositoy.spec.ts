@@ -29,7 +29,14 @@ describe("Client Repository tests", () => {
             id: new Id("1"),
             name: "John Doe",
             email: "john.doe@example.com",
-            address: "123 Main St",
+            document: "doc",
+            street:'street',
+            state:'state',
+            complement: 'complement',
+            zipCode: 'zipcode',
+            number: '2',
+            city: 'city',
+
         })
 
         await repository.add(client)
@@ -51,6 +58,13 @@ describe("Client Repository tests", () => {
             name: "John Doe",
             email: "john.doe@example.com",
             address: "123 Main St",
+            document: "doc",
+            street: 'street',
+            state: 'state',
+            complement: 'complement',
+            zipCode: 'zipcode',
+            number: '2',
+            city: 'city',
             createdAt: new Date(),
             updatedAt: new Date(),
         })

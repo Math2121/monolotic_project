@@ -10,7 +10,15 @@ export default class ClientRepository implements ClientGateway {
             id: client.id.id,
             name: client.name,
             email: client.email,
-            address: client.address,
+            document: client.document,
+            street: client.street,
+            city: client.city,
+            state: client.state,
+            number: client.number,
+            zipCode: client.zipCode,
+            complement: client.complement,
+            createdAt: client.createdAt,
+            updatedAt: client.updatedAt,
         })
     }
     async find(id: string): Promise<Client> {
@@ -25,7 +33,14 @@ export default class ClientRepository implements ClientGateway {
             id: new Id(client.get("id")),
             name: client.get("name"),
             email: client.get("email"),
-            address: client.get("address"),
+            document: client.get("document"),
+            street: client.get("street"),
+            city: client.get("city"),
+            state: client.get("state"),
+            number: client.get("number"),
+            zipCode: client.get("zipCode"),
+            complement: client.get("complement"),
+
         });
     }
 

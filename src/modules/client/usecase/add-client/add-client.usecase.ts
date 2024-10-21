@@ -13,7 +13,13 @@ export default class AddClientUseCase implements UseCaseInterface {
         const client = new Client({
             name: input.name,
             email: input.email,
-            address: input.address,
+            city: input.city,
+            street: input.street,
+            number: input.number,
+            zipCode: input.zipCode,
+            state: input.state,
+            complement: input.complement,
+            document: input.document,
             id
         });
         await this._clientRepository.add(client);

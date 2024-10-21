@@ -1,12 +1,19 @@
-import Id from "../../../../@shared/domain/value_object/ide.value_object"
-import Client from "../../entity"
+
+import Id from "../../../@shared/domain/value_object/ide.value_object"
+import Client from "../../domain/entity"
 import FindClientUseCase from "./find-client.usecase"
 
 const client = new Client({
     id: new Id("1"),
     name: 'John Doe',
     email: 'john.doe@example.com',
-    address: '123 Main St'
+    city: 'New York',
+    street: '123 Main St',
+    number: 'A',
+    zipCode: '10001',
+    state: 'NY',
+    complement: 'apt 1B',
+    document: '12345678901'
 })
 const MockRepository = () => {
     return {

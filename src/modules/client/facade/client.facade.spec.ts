@@ -35,7 +35,15 @@ describe("Client Facade tests", () => {
         const input = {
             name: "John Doe",
             email: "john.doe@example.com",
-            address: "rua teste",
+            document: 'doc',
+            street: 'street',
+            state: 'state',
+            complement: 'complement',
+            zipCode: 'zipcode',
+            number: '2',
+            city: 'city',
+            createdAt: new Date(),
+            updatedAt: new Date(),
             id: "1"
         }
 
@@ -68,7 +76,13 @@ describe("Client Facade tests", () => {
             id: "1",
             name: "John Doe",
             email: "john.doe@example.com",
-            address: "123 Main St",
+            document: 'doc',
+            street: 'street',
+            state: 'state',
+            complement: 'complement',
+            zipCode: 'zipcode',
+            number: '2',
+            city: 'city',
             createdAt: new Date(),
             updatedAt: new Date(),
         })
