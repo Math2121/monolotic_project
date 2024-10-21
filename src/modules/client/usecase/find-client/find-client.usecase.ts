@@ -1,5 +1,6 @@
-import UseCaseInterface from "../../../../@shared/usecase/usecase.interface";
-import Client from "../../entity";
+
+import UseCaseInterface from "../../../@shared/usecase/usecase.interface";
+import Client from "../../domain/entity";
 import ClientGateway from "../../gateway/client.gateway";
 
 export default class FindClientUseCase implements UseCaseInterface {
