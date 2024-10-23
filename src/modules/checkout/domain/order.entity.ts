@@ -18,7 +18,7 @@ export default class Order extends BaseEntity implements AgregateRoot {
     
     constructor({ id, client, products, status }: OrderProps) { 
 
-        super(id)
+        super(id ?? new Id(""))
         this._client = client
         this._products = products
         this._status = status || "pending"
