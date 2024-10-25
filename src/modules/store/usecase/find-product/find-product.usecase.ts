@@ -13,7 +13,7 @@ export default class FindProductUseCase implements UseCaseInterface {
         }
 
         const output: FindProductOutputDto = {
-            id: product.id,
+            id: product.id.id,
             name: product.name,
             description: product.description,
             salesPrice: product.salesPrice

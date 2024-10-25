@@ -1,4 +1,5 @@
-import Client from "../entity";
+import Client from "../domain/entity"
+
 
 export default interface ClientGateway {
     add(client: Client): Promise<void>

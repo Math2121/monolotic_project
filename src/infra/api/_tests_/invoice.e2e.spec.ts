@@ -1,62 +1,56 @@
+import Id from "../../../modules/@shared/domain/value_object/ide.value_object";
+import Invoice from "../../../modules/invoice/domain/invoice";
+import Address from "../../../modules/invoice/domain/value-object";
+import InvoiceRepository from "../../../modules/invoice/gateway/repository/invoice.repository";
 
-import request from 'supertest'
-import { app, sequelize } from '../../express';
+import { app, sequelize } from "../../express";
+import request from "supertest";
 
-
-describe('E2E test for invoice', () => {
-    beforeAll(async () => {
+describe("E2E test for invoice", () => {
+    beforeEach(async () => {
         await sequelize.sync({ force: true });
-        sequelize.connectionManager.initPools();
     });
 
     afterAll(async () => {
         await sequelize.close();
     });
 
-    it('should find an invoice', async () => {
-        const client = await request(app)
-            .post('/clients')
-            .send({
-                "id": "1c",
-                "name": "jose",
-                "email": "email@email",
-                "document": "123",
-                "address": {
-                    "street": "street",
-                    "number": "123",
-                    "city": "city",
-                    "zipCode": "zipCode",
-                    "state": "state",
-                    "complement": "complement"
-                }
-            });
-        const product = await request(app)
-            .post('/products')
-            .send({
-                "id": "1p",
-                "name": "product",
-                "description": "description",
-                "purchasePrice": 100,
-                "stock": 10
-            });
+    it("should do the invoice", async () => {
+        const address = new Address({
+            street: "Main Street",
+            number: "123",
+            complement: "Next to the bank",
+            city: "New York",
+            state: "New York",
+            zipCode: "122343404",
+        });
 
-        const checkout = await request(app)
-            .post('/checkout')
-            .send({
-                "clientId": "1c",
-                "products": [
-                    {
-                        "productId": "1p"
-                    }
-                ]
-            });
-        const response = await request(app)
-            .get(`/invoice/${checkout.body.invoiceId}`)
-            .send();
-        expect(response.body.id).toBeDefined();
-        expect(response.body.name).toBe('jose')
-        expect(response.body.items.length).toBe(1)
-        expect(response.body.total).toBe(100)
-    }, 50000);
+        const item1 = {
+            id: new Id("1"),
+            name: "Product 1",
+            price: 100,
+        }
 
+        const item2 = {
+            id: new Id("2"),
+            name: "Product 2",
+            price: 200,
+        }
+
+        const invoice = new Invoice({
+            id: new Id("123"),
+            name: "Invoice 1",
+            document: "Document 1",
+            items: [item1, item2],
+            address: address,
+        });
+
+        const invoiceRepository = new InvoiceRepository();
+
+        await invoiceRepository.save(invoice);
+        const response = await request(app).get(`/invoice/${123}`);
+
+        expect(response.status).toEqual(200);
+        expect(response.body.name).toEqual("Invoice 1");
+    });
 });

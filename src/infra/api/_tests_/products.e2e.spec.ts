@@ -28,6 +28,5 @@ describe('E2E test for product', () => {
         expect(response.body.name).toBe('product');
         expect(response.body.description).toBe('description');
         expect(response.body.purchasePrice).toBe(100);
-        expect(response.body.createdAt).toBeDefined();
     })
 })

@@ -14,17 +14,18 @@ clientRoute.post("/", async (req: Request, res: Response) => {
             name: req.body.name,
             email: req.body.email,
             document: req.body.document,
-            street: req.body.address.street,
-            number: req.body.address.number,
-            city: req.body.address.city,
-            zipCode: req.body.address.zipCode,
-            state: req.body.address.state,
-            complement: req.body.address.complement
+            street: req.body.street,
+            number: req.body.number,
+            city: req.body.city,
+            zipCode: req.body.zipCode,
+            state: req.body.state,
+            complement: req.body.complement
 
         };
         const output = await usecase.execute(clientDto);
         res.send(output);
     } catch (err) {
+        console.error(err);
         res.status(500).send(err);
     }
 });
