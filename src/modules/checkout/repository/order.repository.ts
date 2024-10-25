@@ -24,8 +24,12 @@ export default class OrderRepository implements CheckoutGateway {
                 client: {
                     id: order.client.id.id,
                     name: order.client.name,
-                    document: order.client.document,
-                    email: order.client.email
+                    email: order.client.email,
+                    street: order.client.street,
+                    number: order.client.number,
+                    city: order.client.city,
+                    zipCode: order.client.zipCode,
+                    state: order.client.state,
                 },
                 products: products
             },
@@ -55,8 +59,13 @@ export default class OrderRepository implements CheckoutGateway {
         const client = new Client({
             id: new Id(clientBD.id),
             name: clientBD.name,
-            document: clientBD.document,
-            email: clientBD.email
+            email: clientBD.email,
+            street: clientBD.street,
+            number: clientBD.number,
+            city: clientBD.city,
+            zipCode: clientBD.zipCode,
+            state: clientBD.state,
+            complement: clientBD.complement
         })
         return new Order({
             id: new Id(orderBD.id),
