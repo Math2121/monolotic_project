@@ -12,12 +12,13 @@ productRoute.post("/", async (req: Request, res: Response) => {
             id: req.body.id,
             name: req.body.name,
             description: req.body.description,
-            purchasePrice: req.body.purchasePrice,
+            purchasePrice: req.body.salesPrice,
             stock: req.body.stock
         };
         const output = await usecase.execute(productDto);
         res.send(output);
     } catch (err) {
+        console.error(err);
         res.status(500).send(err);
     }
 });

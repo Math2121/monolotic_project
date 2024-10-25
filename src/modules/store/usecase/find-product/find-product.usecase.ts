@@ -6,7 +6,6 @@ export default class FindProductUseCase implements UseCaseInterface {
     constructor(private readonly productRepository: ProductGateway) { }
     async execute(input: FindProductInputDto): Promise<FindProductOutputDto> {
 
-
         const product = await this.productRepository.find(input.id);
         if (!product) {
             throw new Error(`Product not found with id: ${input.id}`);

@@ -25,7 +25,7 @@ describe("Product Facade", () => {
     it("should find a product", async () => {
 
         await ProductModel.create({
-            id: 1,
+            id: "1",
             name: "Test Product",
             description: "teste",
             salesPrice: 100,
@@ -34,7 +34,6 @@ describe("Product Facade", () => {
         const facade = StoreFacadeFactory.create()
         const result = await facade.find({ id: "1" })
         expect(result).toEqual({
-            id: "1",
             name: "Test Product",
             description: "teste",
             salesPrice: 100

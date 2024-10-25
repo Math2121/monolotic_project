@@ -16,6 +16,5 @@ export default class ClientOrder extends Model {
     @Column({ allowNull: false })
     declare email: string;
 
-    @Column({ allowNull: false })
-    declare document: string;
+
 }

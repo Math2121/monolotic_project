@@ -9,12 +9,14 @@ checkoutRoute.post("/", async (req: Request, res: Response) => {
         const checkoutDto = {
             clientId: req.body.clientId,
             products: req.body.products
-                .map((p: { productId: any; }) => { return { productId: p.productId } })
+                .map((p: { productId: string; }) => { return { productID: p.productId } })
         };
 
         const output = await usecase.execute(checkoutDto);
         res.send(output);
     } catch (err) {
-        res.status(500).send(err);
+        console.error(err);
+        res.status(500)
+        .send(err);
     }
 });

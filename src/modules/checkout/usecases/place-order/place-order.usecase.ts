@@ -43,16 +43,17 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
         if (!client) {
             throw new Error("Client not found");
         }
+
         //validar produtos
         await this.validateProducts(input)
         // recuperar os produtos
         const products = await Promise.all(
-            input.products.map((p) => this.getProduct(p.productId))
+            input.products.map((p) => this.getProduct(p.productID))
         )
 
         // criar o objeto client
         const myClient = new Client({
-            id: new Id(client.id.id),
+            id: new Id(""),
             name: client.name,
             email: client.email,
             street: client.street,
@@ -60,9 +61,10 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
             city: client.city,
             zipCode: client.zipCode,
             state: client.state,
+            document: client.document,
             complement: client.complement
         })
-
+console.log(myClient)
         //criar o objeto de ordem
 
         const order = new Order({
@@ -119,7 +121,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
 
         for (const p of input.products) {
             const product = await this._productFacade.checkStock({
-                productID: p.productId
+                productID: p.productID
             })
 
             if (product.stock <= 0) {
@@ -130,6 +132,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     }
 
     private async getProduct(productId: string): Promise<Product> {
+        console.log(productId)
         const product = await this._catalogueFacade.find({ id: productId })
         if (!product) {
             throw new Error(`Product not found`);

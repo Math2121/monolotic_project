@@ -1,5 +1,6 @@
 
 import Id from "../../@shared/domain/value_object/ide.value_object";
+import { ClientModel } from "../../client/gateway/repository/client.model";
 import Client from "../domain/client.entity";
 import Order from "../domain/order.entity";
 import CheckoutGateway from "../gateway/checkout.gateway";
@@ -21,6 +22,7 @@ export default class OrderRepository implements CheckoutGateway {
         try {
             await OrderModel.create({
                 id: order.id.id,
+                clientId: order.client.id.id,
                 client: {
                     id: order.client.id.id,
                     name: order.client.name,
@@ -30,12 +32,11 @@ export default class OrderRepository implements CheckoutGateway {
                     city: order.client.city,
                     zipCode: order.client.zipCode,
                     state: order.client.state,
+                    complement: order.client.complement,
+                    document: order.client.document
                 },
                 products: products
-            },
-                {
-                    include: [ClientOrder, ProductOrder]
-                });
+            });
         } catch (error) {
             console.log(error);
             throw error
@@ -65,6 +66,7 @@ export default class OrderRepository implements CheckoutGateway {
             city: clientBD.city,
             zipCode: clientBD.zipCode,
             state: clientBD.state,
+            document: clientBD.documentation,
             complement: clientBD.complement
         })
         return new Order({

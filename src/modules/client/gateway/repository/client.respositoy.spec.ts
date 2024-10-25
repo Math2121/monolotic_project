@@ -54,7 +54,7 @@ describe("Client Repository tests", () => {
     it("should find a client by id", async () => {
         const repository = new ClientRepository()
         const client = await ClientModel.create({
-            id: "1",
+            id: "2",
             name: "John Doe",
             email: "john.doe@example.com",
             address: "123 Main St",
@@ -69,7 +69,7 @@ describe("Client Repository tests", () => {
             updatedAt: new Date(),
         })
 
-        const result = await repository.find("1")
+        const result = await repository.find("2")
 
         expect(client.get("id")).toEqual(result.id.id)
         expect(client.get("name")).toEqual(result.name)

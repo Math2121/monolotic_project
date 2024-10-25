@@ -1,10 +1,9 @@
-import { AllowNull, Column, Model, PrimaryKey, Table } from "sequelize-typescript"
-
+import {  Column, Model, PrimaryKey, Table } from "sequelize-typescript"
 @Table({
     tableName: 'products',
     timestamps: false
 })
-export default class ProductModel extends Model {
+export default class StoreProductModel extends Model {
 
     @PrimaryKey
     @Column({ allowNull: false })
@@ -14,14 +13,10 @@ export default class ProductModel extends Model {
     @Column
     name: string;
 
-
     @Column
     salesPrice: number;
 
     @Column
     description: string;
-
-    @Column
-    category: string;
 
 }

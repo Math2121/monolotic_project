@@ -4,7 +4,7 @@ import { clientRoute } from "./api/client.route";
 import { productRoute } from "./api/products.route";
 import { checkoutRoute } from "./api/checkout.route";
 import { invoiceRoute } from "./api/invoice.route";
-import { ProductModel } from "../modules/product/gateway/repository/product.model";
+
 import { ClientModel } from "../modules/client/gateway/repository/client.model";
 import TransactionModel from "../modules/payment/gateaway/repository/transaction.model";
 import ClientOrder from "../modules/checkout/repository/client.order.model";
@@ -13,6 +13,8 @@ import InvoiceModel from "../modules/invoice/gateway/repository/invoice.model";
 import ProductOrder from "../modules/checkout/repository/product.order.model";
 import InvoiceItemModel from "../modules/invoice/gateway/repository/invoice.item.model";
 
+import { ProductModel } from "../modules/product/gateway/repository/product.model";
+import StoreProductModel from "../modules/store/gateway/repository/product.model";
 export const app: Express = express();
 app.use(express.json());
 app.use("/clients", clientRoute);
@@ -29,13 +31,11 @@ async function setupDb() {
         logging: false,
     });
     await sequelize.addModels([
+        StoreProductModel,
         ProductModel,
         ClientModel,
-        ProductModel,
         TransactionModel,
         OrderModel,
-        ClientOrder,
-        ProductModel,
         InvoiceModel,
         ProductOrder,
         InvoiceItemModel

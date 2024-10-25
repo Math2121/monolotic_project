@@ -1,6 +1,7 @@
 import { Table, Model, PrimaryKey, Column, HasMany, ForeignKey, BelongsTo } from "sequelize-typescript";
-import ClientOrder from "./client.order.model";
+
 import ProductOrder from "./product.order.model";
+import { ClientModel } from "../../client/gateway/repository/client.model";
 
 
 @Table({
@@ -13,11 +14,11 @@ export default class OrderModel extends Model {
     @Column({ allowNull: false })
     declare id: string;
 
-    @ForeignKey(() => ClientOrder)
+    @ForeignKey(() => ClientModel)
     declare client_id: string;
 
-    @BelongsTo(() => ClientOrder)
-    declare client: ClientOrder;
+    @BelongsTo(() => ClientModel)
+    declare client: ClientModel;
 
     @HasMany(() => ProductOrder, { onUpdate: 'CASCADE' })
     declare products?: ProductOrder[];

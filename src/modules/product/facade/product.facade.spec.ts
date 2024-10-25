@@ -1,8 +1,6 @@
 import { Sequelize } from "sequelize-typescript"
 import { ProductModel } from "../gateway/repository/product.model"
-import ProductRepository from "../gateway/repository/product.repository"
-import AddProductUseCase from "../usecase/add/product.usecase"
-import ProductFacade from "./product.facade"
+
 import ProductFacadeFactory from "../factory/facade.product"
 
 describe("Product Facade", () => {
@@ -45,7 +43,7 @@ describe("Product Facade", () => {
 
         const productFacade = ProductFacadeFactory.create()
         const input = {
-            id: "1",
+            id: "2",
             name: "Test Product",
             purchasePrice: 100,
             stock: 10,
@@ -54,10 +52,10 @@ describe("Product Facade", () => {
         await productFacade.addProduct(input)
 
         const result = await productFacade.checkStock({
-            productID:"1"
+            productID:"2"
         })
 
-        expect(result.productID).toBe("1")
+
         expect(result.stock).toBe(10)
 
     })

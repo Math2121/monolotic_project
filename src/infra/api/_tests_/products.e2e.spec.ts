@@ -20,7 +20,7 @@ describe('E2E test for product', () => {
                 "id": "1",
                 "name": "product",
                 "description": "description",
-                "purchasePrice": 100,
+                "salesPrice": 100,
                 "stock": 10
             });
         expect(response.status).toBe(200);

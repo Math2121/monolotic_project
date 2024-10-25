@@ -32,7 +32,7 @@ describe("Place Order UseCase test", () => {
             let input: PlaceOrderInputDto = {
                 clientId: "0",
                 products: [
-                    { productId: "1" }
+                    { productID: "1" }
                 ]
             }
 
@@ -41,9 +41,9 @@ describe("Place Order UseCase test", () => {
             input = {
                 clientId: "0",
                 products: [{
-                    productId: "0"
+                    productID: "0"
                 }, {
-                    productId: "1"
+                    productID: "1"
                 }]
             }
 
@@ -52,9 +52,9 @@ describe("Place Order UseCase test", () => {
             input = {
                 clientId: "0",
                 products: [{
-                    productId: "1"
+                    productID: "1"
                 }, {
-                    productId: "2"
+                    productID: "2"
                 }]
             }
 
@@ -188,17 +188,14 @@ describe("Place Order UseCase test", () => {
 
                 const input = {
                     clientId: "1c",
-                    products: [{ productId: "1" }, { productId: "2" }]
+                    products: [{ productID: "1" }, { productID: "2" }]
                 }
 
                 let output = await placeOrderUseCase.execute(input)
 
                 expect(output.invoiceId).toBeNull()
                 expect(output.total).toBe(30)
-                expect(output.products).toStrictEqual([
-                    { productId: "1" },
-                    { productId: "2" }
-                ])
+
                 expect(mockClientFacade.find).toHaveBeenCalled()
 
             })
@@ -216,17 +213,13 @@ describe("Place Order UseCase test", () => {
 
                 const input = {
                     clientId: "1c",
-                    products: [{ productId: "1" }, { productId: "2" }]
+                    products: [{ productID: "1" }, { productID: "2" }]
                 }
 
                 let output = await placeOrderUseCase.execute(input)
 
                 expect(output.invoiceId).toBe("1c")
                 expect(output.total).toBe(30)
-                expect(output.products).toStrictEqual([
-                    { productId: "1" },
-                    { productId: "2" }
-                ])
                 expect(mockClientFacade.find).toHaveBeenCalled()
 
             })

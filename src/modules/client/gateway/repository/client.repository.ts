@@ -6,20 +6,26 @@ import { ClientModel } from "./client.model";
 
 export default class ClientRepository implements ClientGateway {
     async add(client: Client): Promise<void> {
-        await ClientModel.create({
-            id: client.id.id,
-            name: client.name,
-            email: client.email,
-            document: client.document,
-            street: client.street,
-            city: client.city,
-            state: client.state,
-            number: client.number,
-            zipCode: client.zipCode,
-            complement: client.complement,
-            createdAt: client.createdAt,
-            updatedAt: client.updatedAt,
-        })
+        try {
+
+            await ClientModel.create({
+                id: client.id.id,
+                name: client.name,
+                email: client.email,
+                document: client.document,
+                street: client.street,
+                city: client.city,
+                state: client.state,
+                number: client.number,
+                zipCode: client.zipCode,
+                complement: client.complement,
+                createdAt: client.createdAt,
+                updatedAt: client.updatedAt,
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
     }
     async find(id: string): Promise<Client> {
         const client = await ClientModel.findOne({
@@ -28,7 +34,7 @@ export default class ClientRepository implements ClientGateway {
         if (!client) {
             throw new Error(`Client with id ${id} not found`);
         }
- 
+
         return new Client({
             id: new Id(client.get("id")),
             name: client.get("name"),

@@ -60,20 +60,20 @@ describe("Client Facade tests", () => {
 
     })
 
-    it("should find a client", async () => { 
+    it("should find a client", async () => {
         const repository = new ClientRepository()
 
         const findUseCase = new FindClientUseCase(repository)
+        const addUseCase = new AddClientUseCase(repository)
         const facade = new ClientFacade({
-            addUseCase: undefined,
+            addUseCase: addUseCase,
             findUseCase: findUseCase
         })
 
         const input = {
-            id: "1"
+            id: "2"
         }
-        await ClientModel.create({
-            id: "1",
+        const input2 = {
             name: "John Doe",
             email: "john.doe@example.com",
             document: 'doc',
@@ -85,12 +85,16 @@ describe("Client Facade tests", () => {
             city: 'city',
             createdAt: new Date(),
             updatedAt: new Date(),
-        })
+            id: "2"
+        }
+
+        await facade.add(input2)
+
 
         const result = await facade.find(input)
-        expect(result.id.id).toEqual("1")
+        expect(result.id.id).toEqual("2")
         expect(result.name).toEqual("John Doe")
-        
+
 
     })
 })

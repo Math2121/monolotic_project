@@ -29,11 +29,3 @@ clientRoute.post("/", async (req: Request, res: Response) => {
         res.status(500).send(err);
     }
 });
-
-clientRoute.get("/:id", async (req: Request, res: Response) => {
-    const usecase = new FindClientUseCase(new ClientRepository());
-    const output = await usecase.execute({ id: req.params.id });
-    res.format({
-        json: async () => res.send(output),
-    });
-});

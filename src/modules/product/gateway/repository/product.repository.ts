@@ -9,7 +9,7 @@ export default class ProductRepository implements ProductGateway {
         await ProductModel.create({
             name: product.name,
             description: product.description,
-            purchasePrice: product.purchasePrice,
+            salesPrice: product.purchasePrice,
             stock: product.stock,
             id: product.id.id.toString(),
         })
@@ -29,7 +29,7 @@ export default class ProductRepository implements ProductGateway {
             id: new Id(result.get('id')),
             name: result.get('name'),
             description: result.get('description'),
-            purchasePrice: result.get('purchasePrice'),
+            purchasePrice: result.get('salesPrice'),
             stock: result.get('stock'),
         })
 
