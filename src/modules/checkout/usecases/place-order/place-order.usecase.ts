@@ -5,6 +5,7 @@ import { InvoiceFacadeInterface } from "../../../invoice/facade/facade.interface
 import PaymentFacadeInterface from "../../../payment/facade/facade.interface";
 import ProductFacadeInterface from "../../../product/facade/product.facade.interface";
 import StoreFacade from "../../../store/facade/store.facade";
+import { StoreFacadeInterface } from "../../../store/facade/store.facade.interface";
 import Client from "../../domain/client.entity";
 import Order from "../../domain/order.entity";
 import Product from "../../domain/product.entity";
@@ -14,14 +15,14 @@ import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
 export default class PlaceOrderUseCase implements UseCaseInterface {
     private _clientFacade: ClientFacadeInterface
     private _productFacade: ProductFacadeInterface
-    private _catalogueFacade: StoreFacade
+    private _catalogueFacade: StoreFacadeInterface
     private _repository: CheckoutGateway
     private _invoiceFacade: InvoiceFacadeInterface
     private _paymentFacade: PaymentFacadeInterface
 
     constructor(clientFacade: ClientFacadeInterface,
         productFacade: ProductFacadeInterface,
-        catalogueFacade: StoreFacade,
+        catalogueFacade: StoreFacadeInterface,
         repository: CheckoutGateway,
         invoiceFacade: InvoiceFacadeInterface,
         paymentFacade: PaymentFacadeInterface
